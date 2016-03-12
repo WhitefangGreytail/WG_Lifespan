@@ -21,7 +21,7 @@ namespace WG_Lifespan
             {
                 int num = data.Age + 1;
                 // Print current date time in game. Singleton<SimulationManager>.instance.m_metaData.m_currentDateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
-                // Debugging.writeDebugToFile(citizenID + ": " + num);
+                // Threading.sb.Append(citizenID + ": " + num + "\n");
 
                 if (num <= 45)
                 {
@@ -34,11 +34,8 @@ namespace WG_Lifespan
                 {
                     FinishSchoolOrWork(citizenID, ref data);
                 }
-                else if ((data.m_flags & Citizen.Flags.Student) != Citizen.Flags.None && 
-                         (num % DataStore.updateAge_workStudyTickValue == 0))
+                else if ((data.m_flags & Citizen.Flags.Student) != Citizen.Flags.None &&  (num % 15 == 0))
                 {
-                    // TODO - 15 / lifeSpanMult * workMult
-                    // Not student?
                     FinishSchoolOrWork(citizenID, ref data);
                 }
 

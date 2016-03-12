@@ -22,9 +22,13 @@ namespace WG_Lifespan
                 ++counter;
 
                 // Reset during next 'tick'
-
                 if (counter == DataStore.lifeSpanMultiplier)
                 {
+/*
+Debugging.writeDebugToFile("tick\n");
+Debugging.writeDebugToFile(sb.ToString());
+sb.Remove(0, sb.Length);
+*/
                     NewResidentAI.canTick = true;
                     counter = 0;
                 }

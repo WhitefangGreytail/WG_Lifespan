@@ -2,6 +2,6 @@
 {
     public class DataStore
     {
-        public static int lifeSpanMultiplier = 5;
+        public static int lifeSpanMultiplier = 2;
     } // end DataStore
 }

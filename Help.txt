@@ -1,6 +1,6 @@
 Version 1.3.2-f1, After Dark and Snowfall DLC compatible.
 
-This mod increases the lifespan of people depending on the multiplier set in the XML file. The default is 2 and can be any integer you wish.
+This mod increases the lifespan of people depending on the multiplier set in the XML file. The default is 2.
 
 At a multiplier of 1, each person lives up to 5 years of age and will die before they reach 6 years.
 

@@ -11,7 +11,7 @@ namespace WG_Lifespan
         }
         public string Description
         {
-            get { return "Multiplies the length of how long citizens live."; }
+            get { return "Multiplies the length of citizens lives."; }
         }
     }
 }

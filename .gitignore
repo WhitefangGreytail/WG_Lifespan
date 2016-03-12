@@ -1,0 +1,8 @@
+*.dll
+*.csproj
+*.suo
+*.sln
+*.xls*
+Help/*
+WG_Lifespan/bin/*
+WG_Lifespan/obj/*

@@ -1,0 +1,26 @@
+Version 1.3.2-f1, After Dark and Snowfall DLC compatible.
+
+This mod increases the lifespan of people depending on the multiplier set in the XML file. The default is 2 and can be any integer you wish.
+
+At a multiplier of 1, each person lives up to 5 years of age and will die before they reach 6 years.
+
+A multiplier of 2 will make each person live up to 10 years... and so on.
+
+[h1] Where is the XML file? [/h1]
+The XML will be first created when active on exit from a city into the main menu. A file named WG_Lifespan.xml will appear in the default location.
+
+Default location by OS
+Windows = C:\Users\<username>\AppData\Local\Colossal Order\Cities_Skylines
+Mac = /Users/<username>/Library/Application Support/Colossal Order/Cities_Skylines
+Linux = /home/<username>/.local/share/Colossal Order/Cities_Skylines
+
+
+[h1] Known Incompatible Mods [/h1]
+WG Resident Rebalance (which will have this mod once updated, so no need to use both)
+
+
+[h1] Extras [/h1]
+Code for viewing is available  [url=https://github.com/WhitefangGreytail/WG_Lifespan]here[/url].
+
+[h1]Credits[/h1]
+Credits to [url=https://github.com/earalov/cities-skylines-unlimiter-1/tree/master/Redirection]Egor Aralov's redirection utils[/url] and [url=https://github.com/sschoener/cities-skylines-detour/blob/master/CitiesSkylinesDebugInformation/RedirectionHelper.cs]Cope's redirection helper[/url]

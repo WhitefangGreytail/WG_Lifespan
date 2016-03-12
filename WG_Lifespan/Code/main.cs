@@ -121,18 +121,10 @@ namespace WG_Lifespan
         /// </summary>
         private void readFromXML()
         {
-            // Check the exe directory first
-            currentFileLocation = ColossalFramework.IO.DataLocation.executableDirectory + Path.DirectorySeparatorChar + XML_FILE;
-            bool fileAvailable = File.Exists(currentFileLocation);
+            // Switch to default which is the cities skylines in the application data area.
+            currentFileLocation = ColossalFramework.IO.DataLocation.localApplicationData + Path.DirectorySeparatorChar + XML_FILE;
 
-            if (!fileAvailable)
-            {
-                // Switch to default which is the cities skylines in the application data area.
-                currentFileLocation = ColossalFramework.IO.DataLocation.localApplicationData + Path.DirectorySeparatorChar + XML_FILE;
-                fileAvailable = File.Exists(currentFileLocation);
-            }
-
-            if (fileAvailable)
+            if (File.Exists(currentFileLocation))
             {
                 // Load in from XML - Designed to be flat file for ease
                 WG_XMLBaseVersion reader = new XML_VersionOne();

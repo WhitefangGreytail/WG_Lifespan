@@ -21,6 +21,15 @@ namespace WG_Lifespan
             {
                 if (node.Name.Equals("lifeSpan_Multiplier"))
                 {
+                    try
+                    {
+                        DataStore.lifeSpanMultiplier = Convert.ToInt32(node.InnerText);
+                    }
+                    catch (Exception e)
+                    {
+                        Debugging.panelMessage("lifeSpan_Multiplier: " + e.Message + ". Setting to 2");
+                        DataStore.lifeSpanMultiplier = 2;
+                    }
                 }
             }
         } // end readXML

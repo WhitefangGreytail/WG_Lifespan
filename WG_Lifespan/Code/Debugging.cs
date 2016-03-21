@@ -1,11 +1,14 @@
 ﻿using System;
 using System.IO;
 using ColossalFramework.Plugins;
+using System.Text;
 
 namespace WG_Lifespan
 {
     class Debugging
     {
+        public static StringBuilder sb = new StringBuilder();
+
         // Write to a file
         public static void writeDebugToFile(String text, String fileName)
         {
@@ -26,6 +29,23 @@ namespace WG_Lifespan
         public static void panelMessage(string text)
         {
             DebugOutputPanel.AddMessage(PluginManager.MessageType.Message, "WG_Lifespan: " + text);
+        }
+
+
+        // Buffer warning
+        public static void bufferWarning(string text)
+        {
+            sb.AppendLine("WG_Lifespan: " + text);
+        }
+
+        // Output buffer
+        public static void releaseBuffer()
+        {
+            if (sb.Length > 0)
+            {
+                DebugOutputPanel.AddMessage(PluginManager.MessageType.Warning, sb.ToString());
+                sb.Remove(0, sb.Length);
+            }
         }
 
 

@@ -7,7 +7,7 @@ namespace WG_Lifespan
     {
         public string Name
         {
-            get { return "WG Lifespan v1.0"; }
+            get { return "WG Lifespan v1.1"; }
         }
         public string Description
         {

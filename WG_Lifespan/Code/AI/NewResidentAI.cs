@@ -1,11 +1,7 @@
 ﻿using Boformer.Redirection;
 using ColossalFramework;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace WG_Lifespan
 {
@@ -17,7 +13,9 @@ namespace WG_Lifespan
         [RedirectMethod]
         private bool UpdateAge(uint citizenID, ref Citizen data)
         {
-            if (canTick)
+            // Citzen numbers are all over the array
+            // Costs a bit more in terms of CPU, but spreads out citizen movement and dying
+            if ((DataStore.citizenNumberBounds[Threading.counter] <= citizenID & citizenID < DataStore.citizenNumberBounds[Threading.counter + 1]))
             {
                 int num = data.Age + 1;
                 // Print current date time in game. Singleton<SimulationManager>.instance.m_metaData.m_currentDateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)

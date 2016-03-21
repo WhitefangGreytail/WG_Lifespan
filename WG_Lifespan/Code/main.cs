@@ -6,7 +6,6 @@ using System.Xml;
 using ICities;
 using System.Diagnostics;
 using Boformer.Redirection;
-using ColossalFramework.Math;
 
 namespace WG_Lifespan
 {
@@ -23,14 +22,33 @@ namespace WG_Lifespan
         private string currentFileLocation = "";
         private static volatile bool isModEnabled = false;
         private static volatile bool isLevelLoaded = false;
+        private static Stopwatch sw;
+
 
         public override void OnCreated(ILoading loading)
         {
             if (!isModEnabled)
             {
                 isModEnabled = true;
+                sw = Stopwatch.StartNew();
+
                 readFromXML();
+
+                DataStore.citizenNumberBounds = new int[DataStore.lifeSpanMultiplier + 1];
+                DataStore.citizenNumberBounds[0] = 0;
+                DataStore.citizenNumberBounds[DataStore.citizenNumberBounds.Length - 1] = CitizenManager.MAX_CITIZEN_COUNT + 1;
+                int increment = CitizenManager.MAX_CITIZEN_COUNT / DataStore.lifeSpanMultiplier;
+
+                for (int i = 1; i < DataStore.citizenNumberBounds.Length - 1; ++i) // Ignore ends
+                {
+                    DataStore.citizenNumberBounds[i] = DataStore.citizenNumberBounds[i - 1] + increment;
+                }
+
                 Redirect();
+
+                sw.Stop();
+                UnityEngine.Debug.Log("WG_CitizenEdit: Successfully loaded in " + sw.ElapsedMilliseconds + " ms.");
+
             }
         }
 
@@ -72,6 +90,8 @@ namespace WG_Lifespan
                 if (!isLevelLoaded)
                 {
                     isLevelLoaded = true;
+                    Debugging.releaseBuffer();
+                    Debugging.panelMessage("Successfully loaded in " + sw.ElapsedMilliseconds + " ms.");
                 }
             }
         }
@@ -93,8 +113,8 @@ namespace WG_Lifespan
                 }
                 catch (Exception e)
                 {
-                    Debugging.writeDebugToFile($"An error occured while applying {type.Name} redirects!");
-                    Debugging.writeDebugToFile(e.StackTrace);
+                    UnityEngine.Debug.Log($"An error occured while applying {type.Name} redirects!");
+                    UnityEngine.Debug.Log(e.StackTrace);
                 }
             }
         }
@@ -109,8 +129,8 @@ namespace WG_Lifespan
                 }
                 catch (Exception e)
                 {
-                    Debugging.writeDebugToFile($"An error occured while reverting {kvp.Key.Name} redirect!");
-                    Debugging.writeDebugToFile(e.StackTrace);
+                    UnityEngine.Debug.Log($"An error occured while reverting {kvp.Key.Name} redirect!");
+                    UnityEngine.Debug.Log(e.StackTrace);
                 }
             }
             redirectsOnCreated.Clear();
@@ -146,12 +166,14 @@ namespace WG_Lifespan
                 catch (Exception e)
                 {
                     // Game will now use defaults
-                    Debugging.panelMessage(e.Message);
+                    Debugging.bufferWarning("The following exception(s) were detected while loading the XML file. Some (or all) values may not be loaded.");
+                    Debugging.bufferWarning(e.Message);
+                    UnityEngine.Debug.LogException(e);
                 }
             }
             else
             {
-                Debugging.panelMessage("Configuration file not found. Will output new file to : " + currentFileLocation);
+                UnityEngine.Debug.Log("Configuration file not found. Will output new file to : " + currentFileLocation);
             }
         }
     }

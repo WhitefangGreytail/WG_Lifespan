@@ -27,7 +27,13 @@ namespace WG_Lifespan
                     }
                     catch (Exception e)
                     {
-                        Debugging.panelMessage("lifeSpan_Multiplier: " + e.Message + ". Setting to 2");
+                        Debugging.bufferWarning("lifeSpan_Multiplier: " + e.Message + ". Setting to 2");
+                        DataStore.lifeSpanMultiplier = 2;
+                    }
+
+                    if (DataStore.lifeSpanMultiplier <= 0)
+                    {
+                        Debugging.bufferWarning("Detecting a lifeSpan multiplier less than or equal to 0 . Setting to 2");
                         DataStore.lifeSpanMultiplier = 2;
                     }
                 }
